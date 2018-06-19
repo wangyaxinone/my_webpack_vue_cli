@@ -7,7 +7,8 @@ module.exports = {
     entry:'./src/main.js',
     output:{
         filename:'js/app.js',
-        path:path.join(__dirname,'dist')
+        path:path.join(__dirname, 'dist'),
+        publicPath: '/'
     },
     devtool:'cheap-module-eval-source-map',
     resolve: {
@@ -22,7 +23,9 @@ module.exports = {
       port: 9000,
       hot:true,
       proxy: {
-        "/api": "http://localhost:3000"
+        "/api": {
+          target:'',
+        }
       }
     },
     module: {
@@ -46,7 +49,17 @@ module.exports = {
             test: /\.less$/,
             use: [
               'vue-style-loader',
-              'css-loader',
+              { loader: 'css-loader' },
+              { 
+                loader: 'postcss-loader',
+                // options: {
+                //   // parser: 'sugarss',
+                //   // exec: true,
+                //   config:{
+                //     path:'config/postcss.config.js' 
+                //   }
+                // } 
+              },
               'less-loader'
             ]
           },
@@ -54,7 +67,7 @@ module.exports = {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
             loader: 'url-loader',
             options: {
-              limit: 10000000,
+              limit: 1000,
               name: 'img/[name].[hash:7].[ext]'
             }
           },

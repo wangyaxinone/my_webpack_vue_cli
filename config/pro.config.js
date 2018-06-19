@@ -6,6 +6,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+console.log(__dirname);
 module.exports = {
     mode:'production',
     entry:{
@@ -13,8 +14,8 @@ module.exports = {
     },
     output:{
         filename: 'js/[name]-[chunkhash:6].js',
-        path: path.join(__dirname,'dist'),
-        publicPath: './'
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: ''
     },
     devtool:'nosources-source-map',
     resolve: {
@@ -46,6 +47,7 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'postcss-loader',
                     'less-loader'
                 ]
             },
@@ -53,7 +55,7 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
-                  limit: 10000000,
+                  limit: 1000,//10000000
                   name: 'img/[name].[hash:7].[ext]'
                 }
             },
@@ -113,7 +115,9 @@ module.exports = {
             filename: "css/[name].[hash:6].css",
             //chunkFilename: "[id].[hash:6].css"
         }),
-        new CleanWebpackPlugin(['dist'])
+        new CleanWebpackPlugin(['dist'],{
+            root:path.resolve(__dirname, '../'),
+        })
         
     ]
 }

@@ -1,8 +1,13 @@
 <template>
-  <h1 class="example">{{ msg }}</h1>
+  <div>
+    <h1 class="example">{{ msg }}</h1>  
+    <img src="./assets/images/logo.jpg"  style="width:300px;height:300px;"/> 
+    
+  </div> 
 </template>
 
 <script>
+
 export default {
   data () {
     return {
@@ -15,5 +20,7 @@ export default {
 <style scoped lang="less" >
 .example {
   color: yellow;
+  font-size:36px;/*px*/
+  
 }
 </style>
