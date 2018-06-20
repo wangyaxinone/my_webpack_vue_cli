@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="example">{{ msg }}</h1>  
-    <img src="./assets/images/logo.jpg"  style="width:300px;height:300px;"/> 
-    
+    <h1 class="example">{{ url }}</h1>  
+    <img :src="url+'logo.jpg'"  data-rjs="3"  style="width:300px;height:300px;"/> 
+    <img src="./assets/images/logo.jpg" style="width:300px;height:300px;"/> 
   </div> 
 </template>
 
@@ -11,8 +11,11 @@
 export default {
   data () {
     return {
-      msg: 'Hello world22!2311',
+      url: window.baseImgUrl,
     }
+  },
+  computed:{
+
   }
 }
 </script>

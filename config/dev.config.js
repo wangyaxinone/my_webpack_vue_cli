@@ -2,6 +2,7 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const htmlWebpackPlugin= require('html-webpack-plugin');
 const webpack = require('webpack');
+const express = require('express')
 module.exports = {
     mode:'development',
     entry:'./src/main.js',
@@ -26,6 +27,9 @@ module.exports = {
         "/api": {
           target:'',
         }
+      },
+      setup(app){
+        app.use('/img',express.static('src/assets/images'));
       }
     },
     module: {
@@ -68,7 +72,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 1000,
-              name: 'img/[name].[hash:7].[ext]'
+              name: 'img/[name].[ext]'
             }
           },
           {

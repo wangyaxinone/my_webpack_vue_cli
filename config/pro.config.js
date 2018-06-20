@@ -56,7 +56,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                   limit: 1000,//10000000
-                  name: 'img/[name].[hash:7].[ext]'
+                  name: 'img/[name].[ext]'
                 }
             },
             {
@@ -117,6 +117,7 @@ module.exports = {
         }),
         new CleanWebpackPlugin(['dist'],{
             root:path.resolve(__dirname, '../'),
+            exclude:['img']
         })
         
     ]
